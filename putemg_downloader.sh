@@ -1,5 +1,13 @@
 #!/bin/bash
 
+WGET="wget -c -N"
+BASE_URL="http://biolab.cie.put.poznan.pl/putemg/"
+VIDEO_1080p_DIR=Video-1080p
+VIDEO_576p_DIR=Video-576p
+DEPTH_DIR=Depth
+DATA_HDF5_DIR=Data-HDF5
+DATA_CSV_DIR=Data-CSV
+
 set -e
 
 function usage() {
@@ -8,18 +16,12 @@ function usage() {
     echo 'Arguments:'
     echo '    <experiment_type>    comma-separated list of experiment types (supported types: emg_gestures, emg_force)'
     echo '    <media_type>         comma-separated list of media (supported types: data-csv, data-hdf5, depth, video-1080p, video-576p)'
-    echo '    [<id1> <id2> ...]    optional list of two-digit participant IDs, fetches all if empty list is given'
+    echo '    [<id1> <id2> ...]    optional list of two-digit participant IDs, fetches all if none are given'
     echo
     echo 'Examples:'
     echo `basename $0` emg_gestures data-hdf5,video-1080p
     echo `basename $0` emg_gestures,emg_force data-csv,depth 03 04 07
 }
-
-VIDEO_1080p_DIR=Video-1080p
-VIDEO_576p_DIR=Video-576p
-DEPTH_DIR=Depth
-DATA_HDF5_DIR=Data-HDF5
-DATA_CSV_DIR=Data-CSV
 
 if [ "$#" -lt 2 ]; then
     echo "Illegal number of parameters"
@@ -35,7 +37,7 @@ elif [ "$1" == "emg_force" ]; then
 elif [ "$1" == "emg_force,emg_gestures" ] || [ "$1" == "emg_gestures,emg_force" ] ; then
     EXPERIMENT_TYPES='(emg_gestures|emg_force)'
 else
-    echo "Invalid parameter $1"
+    echo "Invalid experiment types $1"
     usage
     exit 1
 fi
@@ -102,13 +104,6 @@ echo VIDEO_1080P: $VIDEO_1080P
 echo VIDEO_576P: $VIDEO_576P
 
 REGEX="${EXPERIMENT_TYPES}-${IDS}"
-
-echo REGEX: $REGEX
-
-WGET=wget
-BASE_URL=http://biolab.cie.put.poznan.pl/putemg/
-
-EXPERIMENT_TYPES=$1
 
 records=`$WGET "$BASE_URL/records.txt" -O - --quiet | grep -E "$REGEX"`
 

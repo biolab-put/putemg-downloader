@@ -131,7 +131,9 @@ for r in $records ; do
         $WGET "$BASE_URL/$DATA_HDF5_DIR/${r}.hdf5" -P "$DATA_HDF5_DIR"
     fi
     if [ $DEPTH -eq 1 ] ; then
-        $WGET "$BASE_URL/$DEPTH_DIR/${r}.zip" -P "$DEPTH_DIR"
+        if [[ "$HOST" =~ ^emg_gestures.* ]] ; then
+            $WGET "$BASE_URL/$DEPTH_DIR/${r}.zip" -P "$DEPTH_DIR"
+        fi
     fi
     if [ $VIDEO_1080P -eq 1 ] ; then
         $WGET "$BASE_URL/$VIDEO_1080p_DIR/${r}.mp4" -P "$VIDEO_1080p_DIR"

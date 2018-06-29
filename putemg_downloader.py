@@ -117,7 +117,7 @@ for r in records:
                 print(DATA_CSV_DIR + '/' + record + '.csv')
             if "data-hdf5" in media_types:
                 print(DATA_HDF5_DIR + '/' + record + '.hdf5')
-            if "depth" in media_types:
+            if "depth" in media_types and r[0] != "emg_force":
                 print(DEPTH_DIR + '/' + record + '.zip')
             if "video-1080p" in media_types:
                 print(VIDEO_1080p_DIR + '/' + record + '.mp4')

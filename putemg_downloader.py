@@ -114,17 +114,24 @@ for r in records:
         if r[1] in ids:
             record = '{:s}-{:s}-{:s}-{:s}-{:s}'.format(r[0], r[1], r[2], r[3], r[4])
             if "data-csv" in media_types:
-                print(DATA_CSV_DIR + '/' + record + '.csv')
+                print(DATA_CSV_DIR + '/' + record + '.zip')
+                urllib.request.urlretrieve(BASE_URL + DATA_CSV_DIR + '/' + record + '.zip',
+                                           DATA_CSV_DIR + '/' + record + '.zip', download_progress)
             if "data-hdf5" in media_types:
                 print(DATA_HDF5_DIR + '/' + record + '.hdf5')
+                urllib.request.urlretrieve(BASE_URL + DATA_HDF5_DIR + '/' + record + '.hdf5',
+                                           DATA_HDF5_DIR + '/' + record + '.hdf5', download_progress)
             if "depth" in media_types and r[0] != "emg_force":
                 print(DEPTH_DIR + '/' + record + '.zip')
+                urllib.request.urlretrieve(BASE_URL + DEPTH_DIR + '/' + record + '.zip',
+                                           DEPTH_DIR + '/' + record + '.zip', download_progress)
             if "video-1080p" in media_types:
                 print(VIDEO_1080p_DIR + '/' + record + '.mp4')
+                urllib.request.urlretrieve(BASE_URL + VIDEO_1080p_DIR + '/' + record + '.mp4',
+                                           VIDEO_1080p_DIR + '/' + record + '.mp4', download_progress)
             if "video-576p" in media_types:
                 print(VIDEO_576p_DIR + '/' + record + '.mp4')
-                urllib.request.urlretrieve(BASE_URL + VIDEO_576p_DIR + '/' + record + '.mp4', VIDEO_576p_DIR + '/' + record + '.mp4', download_progress)
+                urllib.request.urlretrieve(BASE_URL + VIDEO_576p_DIR + '/' + record + '.mp4',
+                                           VIDEO_576p_DIR + '/' + record + '.mp4', download_progress)
 
-        #urllib.request.urlretrieve(BASE_URL + , '/Users/scott/Downloads/cat.jpg')
-        #$WGET "$BASE_URL/$DATA_CSV_DIR/${r}.csv" -P "$DATA_CSV_DIR"
 

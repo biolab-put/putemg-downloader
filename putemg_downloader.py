@@ -19,7 +19,7 @@ def usage():
     print('Arguments:')
     print('    <experiment_type>    comma-separated list of experiment types (supported types: emg_gestures, emg_force)')
     print('    <media_type>         comma-separated list of media (supported types: data-csv, data-hdf5, depth, video-1080p, video-576p)')
-    print('    [<id1> <id2> ...]    optional list of two-digit participant IDs, fetches all if empty none are given')
+    print('    [<id1> <id2> ...]    optional list of two-digit participant IDs, fetches all if none are given')
     print()
     print('Examples:')
     print('{:s} emg_gestures data-hdf5,video-1080p'.format(os.path.basename(__file__)))

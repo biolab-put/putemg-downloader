@@ -4,7 +4,7 @@ For dataset description and terms of use, please see http://biolab.put.poznan.pl
 
 # Usage
 
-Arguments are identical for both bash and Python versions. Python version also checks selected ID availability, bash just skips unavailable IDs.
+Arguments are identical for both bash and Python versions. Python version also checks selected ID availability, bash just skips unavailable IDs. Bash version requires wget.
 
 ```shell
 putemg_downloader.sh <experiment_type> <media_type> [<id1> <id2> ...]
@@ -16,7 +16,7 @@ Arguments:
     
 `<media_type>` comma-separated list of media (supported types: data-csv, data-hdf5, depth, video-1080p, video-576p)
     
-`[<id1> <id2> ...]` optional list of two-digit participant IDs, fetches all if empty none are given
+`[<id1> <id2> ...]` optional list of two-digit participant IDs, fetches all if none are given
 
 # Examples
 

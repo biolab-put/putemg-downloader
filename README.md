@@ -1,6 +1,6 @@
 # putemg-downloader
 Download scripts for putEMG dataset.
-For dataset description and terms of use, please see http://biolab.put.poznan.pl/putemg-dataset/
+For dataset description and terms of use, please see https://biolab.put.poznan.pl/putemg-dataset/
 
 # Usage
 

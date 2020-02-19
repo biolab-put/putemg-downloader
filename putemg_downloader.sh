@@ -1,7 +1,7 @@
 #!/bin/bash
 
 WGET="wget -c -N"
-BASE_URL="http://biolab.cie.put.poznan.pl/putemg/"
+BASE_URL='https://chmura.put.poznan.pl/s/G285gnQVuCnfQAx/download?path=%2F'
 VIDEO_1080p_DIR=Video-1080p
 VIDEO_576p_DIR=Video-576p
 DEPTH_DIR=Depth
@@ -105,7 +105,7 @@ echo VIDEO_576P: $VIDEO_576P
 
 REGEX="${EXPERIMENT_TYPES}-${IDS}"
 
-records=`$WGET "$BASE_URL/records.txt" -O - --quiet | grep -E "$REGEX"`
+records=`$WGET "$BASE_URL"'&files=records.txt' -O - --quiet | grep -E "$REGEX"`
 
 if [ $DATA_CSV -eq 1 ] ; then
     mkdir -p "$DATA_CSV_DIR"
@@ -125,20 +125,20 @@ fi
 
 for r in $records ; do
     if [ $DATA_CSV -eq 1 ] ; then
-        $WGET "$BASE_URL/$DATA_CSV_DIR/${r}.csv" -P "$DATA_CSV_DIR"
+        $WGET "$BASE_URL""$DATA_CSV_DIR"'&files='"${r}.zip" -O "$DATA_CSV_DIR"/"${r}.zip"
     fi
     if [ $DATA_HDF5 -eq 1 ] ; then
-        $WGET "$BASE_URL/$DATA_HDF5_DIR/${r}.hdf5" -P "$DATA_HDF5_DIR"
+        $WGET "$BASE_URL""$DATA_HDF5_DIR"'&files='"${r}.hdf5" -O "$DATA_HDF5_DIR"/"${r}.hdf5"
     fi
     if [ $DEPTH -eq 1 ] ; then
-        if [[ "$HOST" =~ ^emg_gestures.* ]] ; then
-            $WGET "$BASE_URL/$DEPTH_DIR/${r}.zip" -P "$DEPTH_DIR"
+        if [[ "$r" =~ ^emg_gestures.* ]] ; then
+            $WGET "$BASE_URL""$DEPTH_DIR"'&files='"${r}.zip" -O "$DEPTH_DIR"/"${r}.zip"
         fi
     fi
     if [ $VIDEO_1080P -eq 1 ] ; then
-        $WGET "$BASE_URL/$VIDEO_1080p_DIR/${r}.mp4" -P "$VIDEO_1080p_DIR"
+        $WGET "$BASE_URL""$VIDEO_1080p_DIR"'&files='"${r}.mp4" -O "$VIDEO_1080p_DIR"/"${r}.mp4"
     fi
     if [ $VIDEO_576P -eq 1 ] ; then
-        $WGET "$BASE_URL/$VIDEO_576p_DIR/${r}.mp4" -P "$VIDEO_576p_DIR"
+        $WGET "$BASE_URL""$VIDEO_576p_DIR"'&files='"${r}.mp4" -O "$VIDEO_576p_DIR"/"${r}.mp4"
     fi
 done

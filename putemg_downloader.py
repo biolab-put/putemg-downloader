@@ -5,7 +5,7 @@ import sys
 import urllib.request
 import re
 
-BASE_URL = "https://chmura.put.poznan.pl/s/G285gnQVuCnfQAx/download?path=%2F"
+BASE_URL = "https://chmura.put.poznan.pl/s/45NY5snj0U4tgQz/download?path=%2F"
 
 VIDEO_1080p_DIR = "Video-1080p"
 VIDEO_576p_DIR = "Video-576p"
